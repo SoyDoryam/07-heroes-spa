@@ -22,7 +22,7 @@ export const HeroesRoutes = () => {
           <Route path="search" element={<SearchPage />} />
 
           {/* Ruta para ver un héroe por su ID */}
-          <Route path="hero" element={<HeroPage />} />
+          <Route path="hero/:id" element={<HeroPage />} />
 
           {/* Ruta por defecto: redirección a la página de Marvel */}
           <Route path="/" element={<Navigate to="/marvel" />} />
