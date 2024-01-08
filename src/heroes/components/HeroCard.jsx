@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 
 const CharactersByHero = ({alter_ego, characters}) => {
-  if (alter_ego === characters) return (<></>);
+  // if (alter_ego === characters) return (<></>);
 
-  return <p>{characters}</p>
+  return (alter_ego === characters )
+    ? <></> 
+    : <p>{characters}</p>
 };
 
 export const HeroCard = ({
@@ -16,6 +18,7 @@ export const HeroCard = ({
 }) => {
   const heroImageUrl = `/assets/heroes/${id}.jpg`;
 
+  // const charactesByHero = (<p >{characters}</p>);
   return (
     <div className="col">
       <div className="card">
@@ -33,9 +36,11 @@ export const HeroCard = ({
                       (alter_ego != characters ) && charactesByHero
                     } */}
 
-                    <charactesByHero characters={characters} alter_ego={alter_ego} />
+                    <CharactersByHero characters={characters} alter_ego={alter_ego} />
 
-                    <p className="card-Text">{ first_appearance }</p>
+                    <p className="card-Text">
+                      <small className="text-muted">{ first_appearance }</small>
+                    </p>
 
                     <Link to={`/hero${ id }`}>
                       Mas..
