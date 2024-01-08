@@ -1,21 +1,22 @@
-// Importa la función getHeroesByPublisher desde el archivo de helpers
 import { getHeroesByPublisher } from "../helpers";
+import { HeroCard } from "./HeroCard";
 
-// Define el componente funcional HeroList que recibe la propiedad 'publisher'
 export const HeroList = ({ publisher }) => {
-  // Obtiene la lista de héroes filtrada por el 'publisher' utilizando la función getHeroesByPublisher
+  // Obtener la lista de héroes del editor específico
   const heroes = getHeroesByPublisher(publisher);
 
-  // Retorna la estructura del componente HeroList
   return (
-    <>
-      {/* Lista desordenada para mostrar los nombres de los superhéroes */}
-      <ul>
-        {/* Mapea sobre la lista de héroes y muestra cada nombre como un elemento de lista */}
-        {heroes.map((hero) => (
-          <li key={hero.id}>{hero.superhero}</li>
-        ))}
-      </ul>
-    </>
+    // Utilizar la clase de Bootstrap para organizar las tarjetas en filas y columnas
+    <div className="row row-cols-1 row-cols-md-3 g-3">
+      {
+        // Mapear cada héroe y renderizar una tarjeta para cada uno
+        heroes.map(hero => ( 
+          <HeroCard 
+            key={hero.id} // Utilizar el ID del héroe como clave única
+            { ...hero }   // Propagar todas las propiedades del héroe como propiedades individuales
+          />
+        ))
+      }
+    </div>
   );
 };

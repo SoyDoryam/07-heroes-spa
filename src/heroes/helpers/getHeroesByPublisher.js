@@ -2,9 +2,18 @@
 import { heroes } from '../data/heroes';
 
 // Definimos una función que filtra héroes según la editorial
-export const getHeroesByPublisher = (publisher) => {
+    export const getHeroesByPublisher = (publisher) => {
+        // Filtrar héroes sin repetir por nombre
+    const heroesUnique = heroes.filter(
+      (item, index, self) =>
+        index === self.findIndex((t) => t.publisher === item.publisher)
+    );
+
+    // Mostrar solo el nombre de los héroes filtrados
+    const uniquePublishers = heroesUnique.map(hero => hero.publisher.trim());
     // Definimos las editoriales válidas
-    const validPublishers = ['DC Comics', 'Marvel Comics'];
+    const validPublishers = [...uniquePublishers];
+    // const validPublishers = ['DC Comics', 'Marvel Comics'];
 
     // Verificamos si la editorial proporcionada es válida
     if (!validPublishers.includes(publisher)) {
