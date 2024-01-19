@@ -1,9 +1,10 @@
+import { useMemo } from "react";
 import { getHeroesByPublisher } from "../helpers";
 import { HeroCard } from "./HeroCard";
 
 export const HeroList = ({ publisher }) => {
   // Obtener la lista de héroes del editor específico
-  const heroes = getHeroesByPublisher(publisher);
+  const heroes = useMemo(() => getHeroesByPublisher(publisher), [publisher]);
 
   return (
     // Utilizar la clase de Bootstrap para organizar las tarjetas en filas y columnas
