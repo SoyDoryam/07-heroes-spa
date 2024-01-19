@@ -24,13 +24,13 @@ export const HeroPage = () => {
 
   // Si se encuentra información del héroe, muestra la página del héroe.
   return (
-    <div className="row mt-5">
+    <div className="row mt-5 animate__animated animate__fadeInLeft">
       <div className="col-4">
         {/* Muestra la imagen del héroe con un formato de miniatura */}
         <img 
           src={ `/assets/heroes/${id}.jpg` }
           alt={hero.superhero} 
-          className="img-thumbnail"
+          className="img-thumbnail "
         />
       </div>
 
