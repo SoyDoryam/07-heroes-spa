@@ -1,8 +1,9 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useForm } from '../../hooks/useForm';
 import queryString from 'query-string';
+import { useForm } from '../../hooks/useForm';
 import { HeroCard } from '../components';
+import { getHeroesByName } from '../helpers';
 
 export const SearchPage = () => {
   // Hook de navegación y ubicación
@@ -10,11 +11,14 @@ export const SearchPage = () => {
   const location = useLocation();
 
   // Obtener el valor del parámetro de consulta 'q' de la URL
-  const { q } = queryString.parse(location.search);
+  const { q = '' } = queryString.parse(location.search);
+
+  // Obtener la lista de héroes que coinciden con la búsqueda
+  const heroes = getHeroesByName(q);
 
   // Custom Hook para gestionar el formulario
   const { searchText, onInputChange } = useForm({
-    searchText: '',
+    searchText: q,
   });
 
   // Manejar la búsqueda al enviar el formulario
@@ -63,8 +67,14 @@ export const SearchPage = () => {
           <div className="alert alert-primary">Search a hero</div>
           <div className="alert alert-danger">No hero with <b>{q}</b></div>
 
+          {/* Mapear y mostrar las tarjetas de héroes */}
           {/* Componente de tarjeta de héroe (actualmente comentado) */}
-          {/* <HeroCard {...HeroCard}/> */}
+          {
+            heroes.map(hero => (
+              <HeroCard key={hero.key} {...hero}/>
+            ))
+          }
+
         </div>
       </div>
     </>
