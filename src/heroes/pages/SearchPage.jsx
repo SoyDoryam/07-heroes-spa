@@ -16,6 +16,10 @@ export const SearchPage = () => {
   // Obtener la lista de héroes que coinciden con la búsqueda
   const heroes = getHeroesByName(q);
 
+
+  const showSearch = ( q.length === 0 );
+  const showError = ( q.length > 0 ) && heroes.length === 0;
+
   // Custom Hook para gestionar el formulario
   const { searchText, onInputChange } = useForm({
     searchText: q,
@@ -26,9 +30,9 @@ export const SearchPage = () => {
     event.preventDefault();
     
     // Verificar que la longitud del texto sea mayor a 1
-    if (searchText.trim().length <= 1) {
-      return;
-    }
+    // if (searchText.trim().length <= 1) {
+    //   return;
+    // }
 
     // Navegar a la misma página con el nuevo parámetro de consulta
     navigate(`?q=${searchText}`);
@@ -64,8 +68,15 @@ export const SearchPage = () => {
           <hr />
 
           {/* Mensajes de resultados */}
-          <div className="alert alert-primary">Search a hero</div>
-          <div className="alert alert-danger">No hero with <b>{q}</b></div>
+          <div className="alert alert-primary animate__animated animate__fadeIn" 
+               style={{display: showSearch ? '' : 'none'}}>
+            Search a hero
+          </div>
+
+          <div className="alert alert-danger animate__animated animate__fadeIn" 
+               style={{display: showError ? '' :'none'}}>
+            No hero with <b>{q}</b>
+          </div>
 
           {/* Mapear y mostrar las tarjetas de héroes */}
           {/* Componente de tarjeta de héroe (actualmente comentado) */}
