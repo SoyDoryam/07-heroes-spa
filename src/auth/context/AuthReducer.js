@@ -1,21 +1,19 @@
 import { types } from "../types/types";
 
-export const AuthReducer = ( state = initialState, action ) => {
-    switch ( action.type ) {
+// Implementa el reducer para gestionar el estado de autenticación
+export const AuthReducer = (state = initialState, action) => {
+    switch (action.type) {
         case types.login:
             return {
+                ...state,
                 logged: true,
-                name: action.payload
+                name: action.payload  // Establece el nombre del usuario al iniciar sesión
             };
-        
         case types.logout:
             return {
-                logged: false,
-                name: action.payload
+                logged: false,  // Establece logged como falso al cerrar sesión
             };
-            
         default:
-            return state;      
-  
+            return state;
     }
 }
