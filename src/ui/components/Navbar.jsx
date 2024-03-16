@@ -1,9 +1,14 @@
 // Importaciones necesarias de React Router Dom
 import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from '../../auth/context/AuthContext';
 
 // Componente funcional para la barra de navegación
 export const Navbar = () => {
 
+    // Obtiene el usuario del contexto de autenticación
+    const { user } = useContext(AuthContext);
+    
     // Utilización del hook useNavigate para la navegación
     const navigate = useNavigate();
 
@@ -46,7 +51,6 @@ export const Navbar = () => {
                         DC
                     </NavLink>
 
-                    
                     {/* NavLink para la página de Search */}
                     <NavLink 
                         className={ ({isActive}) => `nav-item nav-link ${isActive ? 'active ': ''}`} 
@@ -62,7 +66,7 @@ export const Navbar = () => {
                 <ul className="navbar-nav ml-auto">
                     {/* Mostrar el nombre del usuario (ejemplo: Dorian) */}
                     <span className="nav-item nav-link text-primary">
-                        Dorian 
+                        {user?.name} 
                     </span>
 
                     {/* Botón de logout con evento onClick que llama a la función onLogout */}

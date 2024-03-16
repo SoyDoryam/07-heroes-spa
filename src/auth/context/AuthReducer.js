@@ -7,7 +7,7 @@ export const AuthReducer = (state = initialState, action) => {
             return {
                 ...state,
                 logged: true,
-                name: action.payload  // Establece el nombre del usuario al iniciar sesión
+                user: action.payload  // Establece el nombre del usuario al iniciar sesión
             };
         case types.logout:
             return {
